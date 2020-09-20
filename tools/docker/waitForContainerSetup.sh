@@ -26,4 +26,5 @@ function waitUntilServiceIsReady() {
     exit 1
 }
 
+waitUntilServiceIsReady back "Development Server started"
 waitUntilServiceIsReady db "port: 3306  MySQL Community Server (GPL)"
