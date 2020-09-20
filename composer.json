@@ -20,6 +20,9 @@
         , "yahnis-elsts/plugin-update-checker": "^2.0"
     },
     "scripts": {
+        "go": [
+            "docker-compose up -d"
+        ],
         "post-install-cmd": [
             "xrstf\\Composer52\\Generator::onPostInstallCmd",
             "tools/deploy/clean-up-vendor.sh",

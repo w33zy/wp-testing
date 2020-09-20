@@ -1,0 +1,20 @@
+version: '3.2'
+
+volumes:
+    var_lib_mysql: {}
+
+services:
+    db:
+        container_name: wpt_db
+        hostname: wpt_db
+        image: mysql:5.7
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+        volumes:
+            - var_lib_mysql:/var/lib/mysql:rw
