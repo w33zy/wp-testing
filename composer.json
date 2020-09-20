@@ -25,7 +25,7 @@
         ],
         "rego" : [
             "docker-compose down --remove-orphans",
-            "docker volume rm $(docker volume ls | grep -o wpt.*)",
+            "docker volume rm $(docker volume ls | grep -o wpt.*) || true",
             "@go"
         ],
         "post-install-cmd": [
