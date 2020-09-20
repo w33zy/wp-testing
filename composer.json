@@ -23,6 +23,11 @@
         "go": [
             "docker-compose up -d"
         ],
+        "rego" : [
+            "docker-compose down --remove-orphans",
+            "docker volume rm $(docker volume ls | grep -o wpt.*)",
+            "@go"
+        ],
         "post-install-cmd": [
             "xrstf\\Composer52\\Generator::onPostInstallCmd",
             "tools/deploy/clean-up-vendor.sh",
