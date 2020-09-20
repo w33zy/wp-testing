@@ -21,7 +21,8 @@
     },
     "scripts": {
         "go": [
-            "docker-compose up -d"
+            "docker-compose up -d",
+            "tools/docker/waitForContainerSetup.sh"
         ],
         "rego" : [
             "docker-compose down --remove-orphans",
