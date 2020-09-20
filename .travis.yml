@@ -5,6 +5,7 @@ services:
 
 before_install:
     - docker-compose up -d
+    - tools/docker/waitForContainerSetup.sh
 
 script:
     - docker-compose exec db mysql -p123456 -e 'SELECT NOW()'
