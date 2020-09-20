@@ -3,7 +3,7 @@
 # Fork from https://www.marksayson.com/blog/wait-until-docker-containers-initialized/
 
 # Max query attempts before consider setup failed
-MAX_TRIES=5
+MAX_TRIES=10
 
 function waitUntilServiceIsReady() {
     local attempt=1
@@ -22,6 +22,7 @@ function waitUntilServiceIsReady() {
     done
 
     echo "Error: $containerName not responding, cancelling set up"
+    docker-compose logs $containerName
     exit 1
 }
 
