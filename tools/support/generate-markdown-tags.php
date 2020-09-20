@@ -21,7 +21,7 @@ foreach ($tags as $category => &$categoryTags) {
     arsort($categoryTags);
     $popularIndex = round(count($categoryTags) * 0.2);
     $counter = 0;
-    foreach ($categoryTags as $tag => $topicsCount) {
+    foreach (array_keys($categoryTags) as $tag) {
         $categoryTags[$tag] = ($counter < $popularIndex);
         $counter++;
     }
