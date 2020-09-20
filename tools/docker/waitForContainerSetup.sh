@@ -25,4 +25,4 @@ function waitUntilServiceIsReady() {
     exit 1
 }
 
-waitUntilServiceIsReady db "MySQL Community Server"
+waitUntilServiceIsReady db "port: 3306  MySQL Community Server (GPL)"
