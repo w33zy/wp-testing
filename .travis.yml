@@ -8,4 +8,5 @@ before_install:
     - tools/docker/waitForContainerSetup.sh
 
 script:
-    - docker-compose exec db mysql -p123456 -e 'SELECT NOW()'
+    - docker-compose exec db env
+    - docker-compose exec db mysql -e 'SELECT NOW()'
