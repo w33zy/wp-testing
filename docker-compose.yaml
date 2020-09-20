@@ -18,3 +18,14 @@ services:
             MYSQL_PASSWORD: wordpress
         volumes:
             - var_lib_mysql:/var/lib/mysql:rw
+
+    back:
+        container_name: wpt_back
+        hostname: wpt_back
+        image: php:5.5.33-alpine
+        restart: always
+        ports:
+            - 80:80
+        depends_on:
+            - db
+        command: 'php -S 0.0.0.0:80'
