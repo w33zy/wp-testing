@@ -9,5 +9,5 @@ before_install:
 
 script:
     - docker-compose exec db env
-    - docker-compose logs db
+    - docker-compose logs --no-color db | sed 's/.*\[/[/'
     - docker-compose exec db mysql -e 'SELECT NOW()'
