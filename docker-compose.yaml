@@ -28,4 +28,19 @@ services:
             - 80:80
         depends_on:
             - db
+        working_dir: /var/www
         command: 'php -S 0.0.0.0:80'
+        volumes:
+            - ./:/var/www:rw
+
+    starter:
+        container_name: wpt_starter
+        hostname: wpt_starter
+        image: php:5.5.33-alpine
+        restart: on-failure
+        depends_on:
+            - back
+        working_dir: /var/www
+        command: 'tools/docker/starter/run.sh'
+        volumes:
+            - ./:/var/www:rw
