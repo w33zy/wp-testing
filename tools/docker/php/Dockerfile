@@ -1,4 +1,4 @@
-FROM php:5.5.33-alpine
+FROM php:5.6.40-alpine
 
 RUN apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted
 
