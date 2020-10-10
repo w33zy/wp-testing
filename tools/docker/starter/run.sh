@@ -2,4 +2,4 @@
 
 composer install --no-ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist
 
-(cd db && ../vendor/bin/ruckus.php db:migrate)
+# (cd db && ../vendor/bin/ruckus.php db:migrate)
