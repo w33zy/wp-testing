@@ -32,6 +32,7 @@ services:
         command: 'php -S 0.0.0.0:80'
         volumes:
             - ./:/var/www:rw
+            - ./tools/docker/back/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
 
     starter:
         container_name: wpt_starter
@@ -44,3 +45,4 @@ services:
         command: 'tools/docker/starter/run.sh'
         volumes:
             - ./:/var/www:rw
+            - ./tools/docker/back/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
