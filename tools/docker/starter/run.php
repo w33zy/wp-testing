@@ -5,6 +5,8 @@ namespace Wpt;
 
 use mysqli;
 
+define('ROOT', realpath(__DIR__.'/../../../'));
+
 $DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
 $WP_VERSION = getenv('WP_VERSION') ?: 'latest';
 
@@ -27,7 +29,6 @@ $mysqli->query('GRANT ALL ON wpti.* TO wpti');
 
 log('Installing WordPress');
 $WP_LINK="https://wordpress.org/wordpress-$WP_VERSION.tar.gz";
-// $WP_PATCH="../wordpress-$WP_VERSION.patch";
 $WP_FILE="cache/wordpress-$WP_VERSION.tar.gz";
 
 echo shell_exec('rm -rf wordpress');
@@ -35,9 +36,11 @@ echo shell_exec('rm -rf wordpress');
 log('.. downloading');
 
 echo shell_exec("curl -s -z $WP_FILE -o $WP_FILE $WP_LINK");
-
 echo shell_exec("tar -xzf $WP_FILE");
 
+$config = file_get_contents(ROOT.'/tests/integration-environment/wp-config.php');
+$config = str_replace('utf8', $DB_CHARSET, $config);
+file_put_contents(ROOT.'/wordpress/wp-config.php', $config);
 
 function log($message) {
     $now = date(DATE_ATOM);
