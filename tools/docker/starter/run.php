@@ -13,7 +13,7 @@ $WP_VERSION = getenv('WP_VERSION') ?: 'latest';
 $WP_T_MULTI_SERVER = getenv('WP_T_MULTI_SERVER') ?: 'http://wpt.localhost';
 
 log('Installing vendors');
-echo shell_exec('composer install --ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist');
+echo shell_exec('composer install --no-dev --ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist');
 
 // echo shell_exec('cd db && ../vendor/bin/ruckus.php db:migrate');
 
@@ -68,6 +68,18 @@ while($row = $result->fetch_object()){
     $row->table_name;
     $mysqli->query("ALTER TABLE $row->table_name ENGINE=$DB_ENGINE");
 }
+
+log('Installing plugin');
+$PLUGIN=ROOT.'/wordpress/wp-content/plugins/wp-testing';
+if (file_exists($PLUGIN)) {
+    if (!is_link($PLUGIN)) {
+        log("Plugin $PLUGIN is not link!");
+        exit(2);
+    }
+} else {
+    symlink('../../..', $PLUGIN);
+}
+
 
 function log($message) {
     $now = date(DATE_ATOM);
