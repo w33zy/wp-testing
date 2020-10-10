@@ -9,7 +9,7 @@ define('ROOT', realpath(__DIR__.'/../../../'));
 
 $DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
 $WP_VERSION = getenv('WP_VERSION') ?: 'latest';
-
+$WP_T_MULTI_SERVER = getenv('WP_T_MULTI_SERVER') ?: 'http://wpt.localhost';
 
 log('Installing vendors');
 echo shell_exec('composer install --ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist');
@@ -52,6 +52,9 @@ echo shell_exec("tar -xzf $WP_FILE");
 $config = file_get_contents(ROOT.'/tests/integration-environment/wp-config.php');
 $config = str_replace('utf8', $DB_CHARSET, $config);
 file_put_contents(ROOT.'/wordpress/wp-config.php', $config);
+
+log('.. installing');
+echo shell_exec("wget -q -O - --post-data='weblog_title=wpti&user_name=wpti&admin_password=wpti&admin_password2=wpti&admin_email=wpti%40wpti.dev&blog_public=1' '$WP_T_MULTI_SERVER/wp-admin/install.php?step=2' | grep installed");
 
 function log($message) {
     $now = date(DATE_ATOM);
