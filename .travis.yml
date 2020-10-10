@@ -11,4 +11,4 @@ before_install:
 script:
     - docker-compose exec -eMYSQL_PWD=123456 db mysql -e 'SELECT NOW()'
     - docker-compose exec back php -m
-    - curl -vvv localhost
+    - curl -vvv wpt.localhost
