@@ -7,6 +7,7 @@ use mysqli;
 
 define('ROOT', realpath(__DIR__.'/../../../'));
 
+$DB_ENGINE = getenv('DB_ENGINE') ?: 'InnoDB';
 $DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
 $WP_VERSION = getenv('WP_VERSION') ?: 'latest';
 $WP_T_MULTI_SERVER = getenv('WP_T_MULTI_SERVER') ?: 'http://wpt.localhost';
@@ -55,6 +56,17 @@ file_put_contents(ROOT.'/wordpress/wp-config.php', $config);
 
 log('.. installing');
 echo shell_exec("wget -q -O - --post-data='weblog_title=wpti&user_name=wpti&admin_password=wpti&admin_password2=wpti&admin_email=wpti%40wpti.dev&blog_public=1' '$WP_T_MULTI_SERVER/wp-admin/install.php?step=2' | grep installed");
+
+log("Setting DB engine to $DB_ENGINE");
+$mysqli->query('SET GLOBAL sql_mode = "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"');
+if (!($result = $mysqli->query('select table_name from information_schema.TABLES  where table_schema = "wpti"'))) {
+    log('Can not fetch tables');
+    exit(2);
+}
+while($row = $result->fetch_object()){
+    $row->table_name;
+    $mysqli->query("ALTER TABLE $row->table_name ENGINE=$DB_ENGINE");
+}
 
 function log($message) {
     $now = date(DATE_ATOM);
