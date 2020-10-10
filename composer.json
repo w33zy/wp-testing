@@ -21,7 +21,7 @@
     },
     "scripts": {
         "go": [
-            "docker-compose up -d",
+            "docker-compose up -d --build",
             "tools/docker/waitForContainerSetup.sh"
         ],
         "rego" : [
