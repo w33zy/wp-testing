@@ -21,7 +21,8 @@ services:
 
     back:
         container_name: wpt_back
-        hostname: wpt_back
+        domainname: wpt.localhost
+        hostname: wpt.localhost
         build:
             context: ./tools/docker/php
         image: wpt_php:latest
