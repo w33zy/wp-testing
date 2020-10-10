@@ -1,3 +1,7 @@
+/.buildpath
+/.externalToolBuilders
+/.project
+/.settings
 /composer.lock
 /db/log/*.log
 /db/*.local.php
@@ -31,3 +35,4 @@
 /tools/support/*.txt
 /tools/support/wordpress-support-mirror/
 /vendor/
+/wordpress/

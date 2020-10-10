@@ -27,8 +27,16 @@ $mysqli->query('GRANT ALL ON wpti.* TO wpti');
 
 log('Installing WordPress');
 $WP_LINK="https://wordpress.org/wordpress-$WP_VERSION.tar.gz";
-$WP_PATCH="../wordpress-$WP_VERSION.patch";
+// $WP_PATCH="../wordpress-$WP_VERSION.patch";
+$WP_FILE="cache/wordpress-$WP_VERSION.tar.gz";
 
+echo shell_exec('rm -rf wordpress');
+
+log('.. downloading');
+
+echo shell_exec("curl -s -z $WP_FILE -o $WP_FILE $WP_LINK");
+
+echo shell_exec("tar -xzf $WP_FILE");
 
 
 function log($message) {
