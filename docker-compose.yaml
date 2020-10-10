@@ -22,7 +22,9 @@ services:
     back:
         container_name: wpt_back
         hostname: wpt_back
-        image: php:5.5.33-alpine
+        build:
+            context: ./tools/docker/php
+        image: wpt_php:latest
         restart: always
         ports:
             - 80:80
@@ -32,12 +34,14 @@ services:
         command: 'php -S 0.0.0.0:80'
         volumes:
             - ./:/var/www:rw
-            - ./tools/docker/back/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+            - ./tools/docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
 
     starter:
         container_name: wpt_starter
         hostname: wpt_starter
-        image: php:5.5.33-alpine
+        build:
+            context: ./tools/docker/php
+        image: wpt_php:latest
         restart: on-failure
         depends_on:
             - back
