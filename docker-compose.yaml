@@ -30,7 +30,7 @@ services:
             - 80:80
         depends_on:
             - db
-        working_dir: /var/www
+        working_dir: /var/www/wordpress
         command: 'php -S 0.0.0.0:80'
         volumes:
             - ./:/var/www:rw
