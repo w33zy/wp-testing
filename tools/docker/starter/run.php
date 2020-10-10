@@ -17,8 +17,19 @@ echo shell_exec('composer install --ansi --no-interaction --no-progress --optimi
 // echo shell_exec('cd db && ../vendor/bin/ruckus.php db:migrate');
 
 log('Creating DB and user');
-$mysqli = new mysqli('db', 'root', '123456');
+$mysqli = new mysqli();
+$tries = 0;
+while ($tries++ < 5) {
+    if (!$mysqli->real_connect('db', 'root', '123456')) {
+        log('Connect error: '.$mysqli->connect_error);
+        sleep(1);
+    }
+}
 
+if ($mysqli->connect_error) {
+    log('Still can not connect...');
+    exit(2);
+}
 
 $mysqli->query('DROP DATABASE IF EXISTS wpti');
 $mysqli->query("CREATE DATABASE wpti DEFAULT CHARACTER SET '$DB_CHARSET'");
