@@ -5,6 +5,10 @@ namespace Wpt;
 
 use mysqli;
 
+$DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
+$WP_VERSION = getenv('WP_VERSION') ?: 'latest';
+
+
 log('Installing vendors');
 echo shell_exec('composer install --ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist');
 
@@ -13,7 +17,6 @@ echo shell_exec('composer install --ansi --no-interaction --no-progress --optimi
 log('Creating DB and user');
 $mysqli = new mysqli('db', 'root', '123456');
 
-$DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
 
 $mysqli->query('DROP DATABASE IF EXISTS wpti');
 $mysqli->query("CREATE DATABASE wpti DEFAULT CHARACTER SET '$DB_CHARSET'");
@@ -21,6 +24,11 @@ $mysqli->query('GRANT USAGE ON wpti.* TO wpti');
 $mysqli->query('DROP USER wpti');
 $mysqli->query('CREATE USER wpti IDENTIFIED BY "wpti"');
 $mysqli->query('GRANT ALL ON wpti.* TO wpti');
+
+log('Installing WordPress');
+$WP_LINK="https://wordpress.org/wordpress-$WP_VERSION.tar.gz";
+$WP_PATCH="../wordpress-$WP_VERSION.patch";
+
 
 
 function log($message) {
