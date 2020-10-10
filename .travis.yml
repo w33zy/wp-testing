@@ -12,3 +12,7 @@ script:
     - docker-compose exec -eMYSQL_PWD=123456 db mysql -e 'SELECT NOW()'
     - docker-compose exec back php -m
     - curl -vvv wpt.localhost
+
+addons:
+    hosts:
+        - wpt.localhost

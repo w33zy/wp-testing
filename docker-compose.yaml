@@ -42,6 +42,8 @@ services:
         hostname: wpt_starter
         build:
             context: ./tools/docker/php
+        links:
+          - "back:wpt.localhost"
         image: wpt_php:latest
         restart: on-failure
         depends_on:
