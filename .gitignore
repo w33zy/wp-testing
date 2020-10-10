@@ -1,6 +1,6 @@
 /composer.lock
 /db/log/*.log
-/db/ruckusing.conf.local.php
+/db/*.local.php
 /db/sql/*.bak
 /js/vendor/evercookie
 /js/vendor/uuid-js
