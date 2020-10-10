@@ -19,8 +19,8 @@ echo shell_exec('composer install --ansi --no-interaction --no-progress --optimi
 log('Creating DB and user');
 $mysqli = new mysqli();
 $tries = 0;
-while ($tries++ < 5) {
-    if (!$mysqli->real_connect('db', 'root', '123456')) {
+while ($tries++ < 10) {
+    if (@!$mysqli->real_connect('db', 'root', '123456')) {
         log('Connect error: '.$mysqli->connect_error);
         sleep(1);
     }
