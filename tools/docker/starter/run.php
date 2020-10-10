@@ -34,6 +34,7 @@ if ($mysqli->connect_error) {
 
 $mysqli->query('DROP DATABASE IF EXISTS wpti');
 $mysqli->query("CREATE DATABASE wpti DEFAULT CHARACTER SET '$DB_CHARSET'");
+$mysqli->select_db('wpti');
 $mysqli->query('GRANT USAGE ON wpti.* TO wpti');
 $mysqli->query('DROP USER wpti');
 $mysqli->query('CREATE USER wpti IDENTIFIED BY "wpti"');
