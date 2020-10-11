@@ -12,3 +12,4 @@ rm -f  samyk/evercookie/assets/*.java
 rm -rf broofa/node-uuid/benchmark
 rm -rf broofa/node-uuid/bin
 rm -rf broofa/node-uuid/test
+rm -rf $(find -iname 'test?' -type d)
