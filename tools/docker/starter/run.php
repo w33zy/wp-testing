@@ -11,6 +11,7 @@ $DB_ENGINE = getenv('DB_ENGINE') ?: 'InnoDB';
 $DB_CHARSET = getenv('DB_CHARSET') ?: 'utf8';
 $WP_VERSION = getenv('WP_VERSION') ?: 'latest';
 $WP_T_MULTI_SERVER = getenv('WP_T_MULTI_SERVER') ?: 'http://wpt.localhost';
+$PLUGIN = ROOT.'/wordpress/wp-content/plugins/wp-testing';
 
 log('Installing vendors');
 echo shell_exec('composer install --no-dev --ansi --no-interaction --no-progress --optimize-autoloader --prefer-dist');
@@ -44,6 +45,9 @@ log('Installing WordPress');
 $WP_LINK="https://wordpress.org/wordpress-$WP_VERSION.tar.gz";
 $WP_FILE="cache/wordpress-$WP_VERSION.tar.gz";
 
+if (file_exists($PLUGIN) && is_link($PLUGIN)) {
+    unlink($PLUGIN);
+}
 echo shell_exec('rm -rf wordpress');
 
 log('.. downloading');
@@ -70,7 +74,7 @@ while($row = $result->fetch_object()){
 }
 
 log('Installing plugin');
-$PLUGIN=ROOT.'/wordpress/wp-content/plugins/wp-testing';
+
 if (file_exists($PLUGIN)) {
     if (!is_link($PLUGIN)) {
         log("Plugin $PLUGIN is not link!");
