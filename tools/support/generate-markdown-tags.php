@@ -3,11 +3,11 @@
 $file = file('php://stdin');
 array_shift($file);
 
-$tags = [
-    'feature' => [],
-    'bug'     => [],
-    'support' => [],
-];
+$tags = array(
+    'feature' => array(),
+    'bug'     => array(),
+    'support' => array(),
+);
 
 // Create tags
 foreach ($file as $line) {
