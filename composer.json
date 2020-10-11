@@ -45,7 +45,8 @@
         ]
     },
     "config": {
-        "autoloader-suffix": "WpTestingF039FAC91B306FBDD13CF04E7AC62DF9"
+        "autoloader-suffix": "WpTestingF039FAC91B306FBDD13CF04E7AC62DF9",
+		"discard-changes": true
     },
     "autoload": {
         "classmap": [
