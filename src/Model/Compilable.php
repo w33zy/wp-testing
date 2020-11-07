@@ -151,7 +151,13 @@ abstract class WpTesting_Model_Compilable extends WpTesting_Model_AbstractModel
      */
     protected function compile()
     {
-        return @eval('return ' . $this->substitute() . ';');
+        $t = $this->textValues;
+
+        $result = @eval('return ' . $this->substitute() . ';');
+
+        unset($t);
+
+        return $result;
     }
 
     /**
